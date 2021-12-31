@@ -30,14 +30,13 @@ if __name__ == "__main__":
     myargparser = argparse.ArgumentParser()
     myargparser.add_argument('--maxtime', type=int, const=120, nargs='?', default=120)
     myargparser.add_argument('--bot_id', type=str, const='text', nargs='?', default=3)
-    myargparser.add_argument('--data_api', type=str, const='text', nargs='?', default='bot_data')
+    myargparser.add_argument('--data_api', type=str, const='text', nargs='?', default='/robothon/mk7744/healthcare_roboplatform/bots/')
     myargparser.add_argument('--event_id', type=int, const=1, nargs='?', default=1)
     myargparser.add_argument('--result_path', type=str, const='text', nargs='?', 
                              default='D:/OneDrive - Higher Education Commission/Documents/NYU/Semester 3/ITP/Bots repos/models/bot')
     args = myargparser.parse_args()
-    sys.path.append('../')
-    
-    bot_data = importlib.import_module(args.data_api)
+    sys.path.append(args.data_api)
+    bot_data = importlib.import_module('bot_data')
     print(args.maxtime)
     print(args.bot_id)
     print(args.data_api)
@@ -97,7 +96,7 @@ if __name__ == "__main__":
     cm = confusion_matrix(y_test, y_pred)
     disp = ConfusionMatrixDisplay(confusion_matrix=cm)
     #disp.plot()
-    filelocation = args.result_path + str(args.bot_id)
+    filelocation = args.result_path
     #filelocation = 'models/bot'+str(args.bot_id)
     classifier.save(filelocation)
 #    plt.show()
