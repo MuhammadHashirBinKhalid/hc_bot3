@@ -53,11 +53,8 @@ if __name__ == "__main__":
     dataset=result.iloc[:,2:]
     dataset['hour']=dataset._time.dt.hour
     dataset['mins']=dataset._time.dt.minute
-    dataset['stress'] = dataset.heart_rate>100
-    print(dataset.head())
-#    sys.exit()
-    X = dataset.iloc[:,1:7].values
-    y = dataset.iloc[:,7].values
+    X = dataset[['calories','distance','heart_rate','steps','hour','mins']].values
+    y = dataset[['stress']].values
     
     # Splitting the dataset into the Training set and Test set
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
